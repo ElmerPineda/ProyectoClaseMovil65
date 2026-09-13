@@ -36,7 +36,7 @@ export default function Products({ navigation }: Props) {
 
   const handleAddProduct = () => {
     if (!name.trim() || !brand.trim()) return;
-    addProduct({ name: name.trim(), brand: brand.trim(), category });
+    dispatch(addProduct({ name: name.trim(), brand: brand.trim(), category }));
     setName("");
     setBrand("");
     setCategory("cleanser");
