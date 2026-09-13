@@ -10,7 +10,6 @@ import ScreenWrapper from "../components/ScreenWrapper";
 import SectionTitle from "../components/SectionTitle";
 import TagChip from "../components/TagChip";
 import { useTheme } from "../contexts/ThemeContext";
-import { useSkincare } from "../contexts/SkincareContext";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { TabsParamList } from "../navigation/TabsNavigator";
 import {
@@ -18,6 +17,8 @@ import {
   PRODUCT_CATEGORIES,
   CATEGORY_LABELS,
 } from "../utils/types/Skincare";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addProduct } from "../store/slices/skincareSlice";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<TabsParamList, "Products">,
@@ -25,7 +26,8 @@ type Props = CompositeScreenProps<
 >;
 
 export default function Products({ navigation }: Props) {
-  const { products, addProduct } = useSkincare();
+  const dispatch = useAppDispatch();
+  const products = useAppSelector(state => state.skincare.products);
   const { colors } = useTheme();
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
