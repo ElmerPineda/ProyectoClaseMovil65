@@ -6,6 +6,7 @@ import SectionTitle from "../components/SectionTitle";
 import { useTheme } from "../contexts/ThemeContext";
 import { useSkincare } from "../contexts/SkincareContext";
 import { CATEGORY_LABELS, Routine } from "../utils/types/Skincare";
+import { useAppSelector } from "../store/hooks";
 
 type RoutineSectionProps = {
   title: string;
@@ -24,7 +25,7 @@ function RoutineSection({
   onAdd,
   onRemove,
 }: RoutineSectionProps) {
-  const { products } = useSkincare();
+  const products = useAppSelector(state => state.skincare.products);
   const { colors } = useTheme();
 
   const routineProducts = productIds
@@ -113,7 +114,7 @@ function RoutineSection({
 }
 
 export default function Routines() {
-  const { products } = useSkincare();
+  const products = useAppSelector(state => state.skincare.products);
   const { colors } = useTheme();
 
   // EJERCICIO: reemplaza este estado local por Redux
